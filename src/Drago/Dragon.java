@@ -114,7 +114,7 @@ public class Dragon implements Comparable<Dragon> {
     }
 
     public String toString() {
-        return " Id: " + id + " Имя: " + name + " Координаты: " + "(" + coordinates + ")" + " Время создания: "+creationDate+ " Возраст: " + age + " Описание: " + description + " Вес: " + weight + " Характер: " + character + " Количество глаз: " + head + " Создатель: " +login;
+        return " Id: " + id + " Name: " + name + " Coordinates: " + "(" + coordinates + ")" + " Creation Date: "+creationDate+ " Age: " + age + " Description: " + description + " Weight: " + weight + " Character: " + character + " Eyes: " + head + " Creator: " +login;
     }
 
 }

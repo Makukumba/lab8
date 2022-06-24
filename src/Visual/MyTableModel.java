@@ -1,4 +1,4 @@
-package Visual.Veng;
+package Visual;
 
 import Drago.Dragon;
 import Visual.DragonTable;
@@ -12,17 +12,20 @@ import java.util.Set;
 
 import static Managers.CommandManager.ts;
 import static Managers.Commander.*;
+
 public class MyTableModel implements TableModel {
     private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
+
     public int getRowCount() {
-       return ts.size();
+        return ts.size();
     }
 
     public int getColumnCount() {
         return 11;
     }
+
     public String getColumnName(int columnIndex) {
-        switch(columnIndex){
+        switch (columnIndex) {
             case 0:
                 return "Login";
             case 1:
@@ -59,32 +62,32 @@ public class MyTableModel implements TableModel {
 
     public Object getValueAt(int rowIndex, int columnIndex) {
         ArrayList<Dragon> d = new ArrayList<Dragon>();
-            ts.stream().forEach(dragon -> d.add(dragon)); // Stream API с лямбдой
+        ts.stream().forEach(dragon -> d.add(dragon)); // Stream API с лямбдой
         Dragon dragon = d.get(rowIndex);
-            switch (columnIndex){
-                case 0:
-                    return dragon.getLogin();
-                case 1:
-                    return String.valueOf(dragon.getId());
-                case 2:
-                    return dragon.getName();
-                case 3:
+        switch (columnIndex) {
+            case 0:
+                return dragon.getLogin();
+            case 1:
+                return dragon.getId();
+            case 2:
+                return dragon.getName();
+            case 3:
                 return dragon.getCoordinates().getX();
-                case 4:
-                    return dragon.getCoordinates().getY();
-                case 5:
-                    return dragon.getCreationDate();
-                case 6:
-                    return dragon.getDescription();
-                case 7:
-                    return dragon.getAge();
-                case 8:
-                    return dragon.getWeight();
-                case 9:
-                    return dragon.getCharacter();
-                case 10:
-                    return dragon.getHead();
-            }
+            case 4:
+                return dragon.getCoordinates().getY();
+            case 5:
+                return String.valueOf(dragon.getCreationDate());
+            case 6:
+                return dragon.getDescription();
+            case 7:
+                return dragon.getAge();
+            case 8:
+                return dragon.getWeight();
+            case 9:
+                return String.valueOf(dragon.getCharacter());
+            case 10:
+                return dragon.getHead();
+        }
 
         return "";
     }

@@ -2,9 +2,11 @@ package commands;
 
 import Drago.Dragon;
 import Managers.CommandManager;
+import Visual.RegVisual;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class Add_if_max extends AbstractCommand {
     CommandManager cm;

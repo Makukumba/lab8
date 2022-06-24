@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import static Visual.EnterVisual.t1;
 
@@ -17,55 +18,56 @@ public class Visual_Add_If extends JFrame {
     long id;
     JTextField Name, X, Y, Desc, Age, Weight, Head;
     JComboBox comboBox;
-
-    public Visual_Add_If(CommandManager cm, long id) {
+    ResourceBundle bundle;
+    public Visual_Add_If(CommandManager cm, long id,ResourceBundle bundle) {
         this.cm = cm;
         this.id = id;
+        this.bundle = bundle;
         setTitle("Добавить дракона");
         Box box1 = Box.createHorizontalBox();
-        JLabel NameLabel = new JLabel("Имя дракона:");
+        JLabel NameLabel = new JLabel(bundle.getString("Имя дракона")+":");
         Name = new JTextField(15);
         box1.add(NameLabel);
         box1.add(Box.createHorizontalStrut(6));
         box1.add(Name);
 
         Box box2 = Box.createHorizontalBox();
-        JLabel XLabel = new JLabel("Координата X:");
+        JLabel XLabel = new JLabel(bundle.getString("Координата X")+":");
         X = new JTextField(15);
         box2.add(XLabel);
         box2.add(Box.createHorizontalStrut(6));
         box2.add(X);
 
         Box box3 = Box.createHorizontalBox();
-        JLabel YLabel = new JLabel("Координата Y:");
+        JLabel YLabel = new JLabel(bundle.getString("Координата Y")+":");
         Y = new JTextField(15);
         box3.add(YLabel);
         box3.add(Box.createHorizontalStrut(6));
         box3.add(Y);
 
         Box box4 = Box.createHorizontalBox();
-        JLabel DescLabel = new JLabel("Описание дракона:");
+        JLabel DescLabel = new JLabel(bundle.getString("Описание дракона")+":");
         Desc = new JTextField(15);
         box4.add(DescLabel);
         box4.add(Box.createHorizontalStrut(6));
         box4.add(Desc);
 
         Box box5 = Box.createHorizontalBox();
-        JLabel AgeLabel = new JLabel("Возраст дракона:");
+        JLabel AgeLabel = new JLabel(bundle.getString("Возраст дракона")+":");
         Age = new JTextField(15);
         box5.add(AgeLabel);
         box5.add(Box.createHorizontalStrut(6));
         box5.add(Age);
 
         Box box6 = Box.createHorizontalBox();
-        JLabel WeightLabel = new JLabel("Вес дракона:");
+        JLabel WeightLabel = new JLabel(bundle.getString("Вес дракона")+":");
         Weight = new JTextField(15);
         box6.add(WeightLabel);
         box6.add(Box.createHorizontalStrut(6));
         box6.add(Weight);
 
         Box box7 = Box.createHorizontalBox();
-        JLabel CharLabel = new JLabel("Характер дракона:");
+        JLabel CharLabel = new JLabel(bundle.getString("Характер дракона")+":");
         String[] elements = {
                 "Cunning",
                 "Evil",
@@ -77,14 +79,14 @@ public class Visual_Add_If extends JFrame {
         box7.add(comboBox);
 
         Box box8 = Box.createHorizontalBox();
-        JLabel HeadLabel = new JLabel("Количество глаз дракона:");
+        JLabel HeadLabel = new JLabel(bundle.getString("Количество глаз")+":");
         Head = new JTextField(15);
         box8.add(HeadLabel);
         box8.add(Box.createHorizontalStrut(6));
         box8.add(Head);
 
         Box box9 = Box.createHorizontalBox();
-        JButton button1 = new JButton("Добавить дракона");
+        JButton button1 = new JButton(bundle.getString("Добавить дракона"));
         JButton button2 = new JButton("<<");
         box9.add(button1);
         box9.add(Box.createHorizontalStrut(6));
@@ -147,7 +149,7 @@ public class Visual_Add_If extends JFrame {
 
     private class BackButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            VisualIfMax visualIfMax = new VisualIfMax(cm);
+            VisualIfMax visualIfMax = new VisualIfMax(cm,bundle);
             setVisible(false);
         }
     }

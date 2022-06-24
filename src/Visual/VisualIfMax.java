@@ -6,14 +6,16 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 public class VisualIfMax extends JFrame {
     CommandManager cm;
     JLabel label;
     JButton button, button1;
     JTextField textField;
-
-    public VisualIfMax(CommandManager cm) {
+    ResourceBundle bundle;
+    public VisualIfMax(CommandManager cm,ResourceBundle bundle) {
+        this.bundle = bundle;
         this.cm = cm;
         setTitle("Add_if_max");
         Box box1 = Box.createHorizontalBox();
@@ -46,7 +48,7 @@ public class VisualIfMax extends JFrame {
             if (cm.if_max(id) == false) {
             cm.if_max_error();
             } else {
-                Visual_Add_If add_if = new Visual_Add_If(cm, id);
+                Visual_Add_If add_if = new Visual_Add_If(cm, id,bundle);
                 setVisible(false);
             }
         }
@@ -54,7 +56,7 @@ public class VisualIfMax extends JFrame {
 
     private class BackButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            MainMenu mainMenu = new MainMenu(cm);
+            MainMenu mainMenu = new MainMenu(cm, bundle);
             setVisible(false);
         }
     }

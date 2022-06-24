@@ -6,15 +6,17 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import static Visual.EnterVisual.t1;
 
 public class UpId extends JFrame {
     CommandManager cm;
     JTextField field;
-
-    public UpId(CommandManager cm) {
+    ResourceBundle bundle;
+    public UpId(CommandManager cm,ResourceBundle bundle) {
         this.cm = cm;
+        this.bundle = bundle;
         setTitle("Update");
         Box box = Box.createHorizontalBox();
         JLabel label = new JLabel("Введите id дракона:");
@@ -47,7 +49,7 @@ public class UpId extends JFrame {
         public void actionPerformed(ActionEvent event) {
         long id = Long.valueOf(field.getText());
         if(cm.CheckId(id)==true) {
-            Updater updater = new Updater(cm,id);
+            Updater updater = new Updater(cm,id,bundle);
             setVisible(false);
         }
         else {
@@ -58,7 +60,7 @@ public class UpId extends JFrame {
 
     private class BackButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            MainMenu mainMenu = new MainMenu(cm);
+            MainMenu mainMenu = new MainMenu(cm,bundle);
             setVisible(false);
         }
     }

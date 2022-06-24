@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import static Visual.EnterVisual.t1;
 
@@ -18,10 +19,11 @@ public class Updater extends JFrame {
     JTextField Name, X, Y, Desc, Age, Weight, Head;
     JComboBox comboBox;
     long id;
-
-    public Updater(CommandManager cm,long id) {
+    ResourceBundle bundle;
+    public Updater(CommandManager cm,long id,ResourceBundle bundle) {
         this.cm = cm;
         this.id = id;
+        this.bundle = bundle;
         setTitle("Добавить дракона");
         setTitle("Добавить дракона");
         Box box1 = Box.createHorizontalBox();
@@ -149,7 +151,7 @@ public class Updater extends JFrame {
 
     private class BackButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            UpId upId = new UpId(cm);
+            UpId upId = new UpId(cm,bundle);
             setVisible(false);
         }
     }

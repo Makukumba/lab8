@@ -8,13 +8,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class D_Remover extends JFrame {
-
+    ResourceBundle bundle;
     CommandManager cm;
     JTextField field;
 
-    public D_Remover(CommandManager cm) {
+    public D_Remover(CommandManager cm,ResourceBundle bundle) {
+        this.bundle = bundle;
         this.cm = cm;
         setTitle("Remove_by_description");
         Box box = Box.createHorizontalBox();
@@ -56,7 +58,7 @@ public class D_Remover extends JFrame {
     }
     private class BackButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            MainMenu mainMenu = new MainMenu(cm);
+            MainMenu mainMenu = new MainMenu(cm, bundle);
             setVisible(false);
         }
     }

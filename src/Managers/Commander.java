@@ -6,20 +6,18 @@ import commands.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Commander {
    public static HashMap<String, Command> commands;
     Dragon dragon;
     long id;
     String d;
+    ResourceBundle bundle;
     public Commander(CommandManager cm) {
         commands = new HashMap<>();
         commands.put("help", new HelpCommand(commands));
-        commands.put("info", new InfoCommand(cm));
+        commands.put("info", new InfoCommand(cm,bundle));
         commands.put("show", new ShowCommand(cm));
         commands.put("save", new SaveCommand(cm));
         commands.put("add", new AddCommand(cm,dragon));
@@ -35,7 +33,7 @@ public class Commander {
         commands.put("print_field_descending_head", new Print_field_descending_head(cm));
         commands.put("create_table",new Create_table());
         commands.put("auth", new Authorization());
-        commands.put("show_users", new ShowUsersCommand());
+        commands.put("show_users", new ShowUsersCommand(bundle));
     }
 
     public void start() throws IOException {

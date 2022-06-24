@@ -6,14 +6,16 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 public class VisualIfMin extends JFrame {
     CommandManager cm;
     JLabel label;
     JButton button, back_button;
     JTextField textField;
-
-    public VisualIfMin(CommandManager cm) {
+    ResourceBundle bundle;
+    public VisualIfMin(CommandManager cm,ResourceBundle bundle) {
+        this.bundle=bundle;
         this.cm = cm;
         setTitle("Add_if_min");
         Box box1 = Box.createHorizontalBox();
@@ -46,7 +48,7 @@ public class VisualIfMin extends JFrame {
                 cm.if_min_error(id);
             }
             else {
-                Visual_Add_If_Min visualAdd = new Visual_Add_If_Min(cm,id);
+                Visual_Add_If_Min visualAdd = new Visual_Add_If_Min(cm,id,bundle);
                 setVisible(false);
             }
         }
@@ -54,7 +56,7 @@ public class VisualIfMin extends JFrame {
 
     private class BackButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            MainMenu mainMenu = new MainMenu(cm);
+            MainMenu mainMenu = new MainMenu(cm,bundle);
             setVisible(false);
         }
     }

@@ -6,13 +6,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
 import static Managers.Connector.getDBConnection;
 
 public class ShowUsersCommand extends AbstractCommand{
-
-    public ShowUsersCommand() {
+    ResourceBundle bundle;
+    public ShowUsersCommand(ResourceBundle bundle) {
         super("show_users", "Показывает логины и захэшированные пароли всех пользователей");
+        this.bundle = bundle;
     }
 
     public void execute() throws IOException {
@@ -27,7 +29,7 @@ public class ShowUsersCommand extends AbstractCommand{
             while (rs.next()) {
                 String login = rs.getString("LOGIN").trim();
                 String password = rs.getString("PASSWORD").trim();
-                s+="Логин пользователя: "+login+"\nпароль: "+password +"\n";
+                s+=bundle.getString("Login")+": "+login+"\n"+ bundle.getString("Password")+": "+password +"\n";
             }
             JOptionPane.showMessageDialog(null,s,"Показ пользователей",JOptionPane.INFORMATION_MESSAGE);
 

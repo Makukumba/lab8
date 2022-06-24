@@ -19,7 +19,7 @@ public class CommandManager {
     Connection dbConnection = null;
     Statement statement = null;
     private Statement request;
-
+   // ResourceBundle bundle;
     public TreeSet<Dragon> read() {
 
         String selectTableSQL = "SELECT ID, NAME, X, Y, DATE, DESCRIPTION, AGE, WEIGHT, DRAGONCHARACTER, DRAGONHEAD, LOGIN from DRAGON";
@@ -95,14 +95,14 @@ public class CommandManager {
         }
     }
 
-    public void info() {
+    public void info(ResourceBundle bundle) {
         String s = "";
         if (ts.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ошибка, Сначала добавьте элементы в коллекцию", "HelpMessage", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, bundle.getString("Error, First add items to collection"), "HelpMessage", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            s += "Коллекция типа " + ts.getClass().getName() + "\n";
-            s += "Количество элементов в коллекции " + ts.size() + "\n";
-            s += "Дата создания коллекции: " + ts.first().getCreationDate() + "\n";
+            s += bundle.getString("Collection type")+": " + ts.getClass().getName() + "\n";
+            s += bundle.getString("Number of items in the collection")+": " + ts.size() + "\n";
+            s += bundle.getString("Collection creation date")+": " + ts.first().getCreationDate() + "\n";
             JOptionPane.showMessageDialog(null, s, "InfoMessage", JOptionPane.INFORMATION_MESSAGE);
 
         }
