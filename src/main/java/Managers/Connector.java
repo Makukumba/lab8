@@ -13,7 +13,7 @@ public class Connector<c> {
             System.out.println(e.getMessage());
         }
         try {
-            dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5487/studs", "s335035", "qgl703");
+            dbConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5486/studs", "s335035", "qgl703");
             return dbConnection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

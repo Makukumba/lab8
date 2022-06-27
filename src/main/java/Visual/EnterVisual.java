@@ -95,7 +95,7 @@ public class EnterVisual extends JFrame {
                         JOptionPane.showMessageDialog(null, "Выполнен вход под логином " + UserName, "Message", JOptionPane.INFORMATION_MESSAGE);
                         MainMenu mainMenu = new MainMenu(cm,b);
                         setVisible(false);
-                        cm.read();
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Неправильный логин или пароль", "Message", JOptionPane.INFORMATION_MESSAGE);
                         break;

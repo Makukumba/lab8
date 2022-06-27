@@ -135,6 +135,7 @@ public class MainMenu extends JFrame {
         back.addActionListener(new BackButton());
         table.addActionListener(new TableButton());
         graph.addActionListener(new GraphButton());
+        cm.read();
     }
 
     private class HelpButton implements ActionListener {
