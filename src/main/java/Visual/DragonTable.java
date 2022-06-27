@@ -10,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.PatternSyntaxException;
 
-import static Visual.EnterVisual.t1;
-
 public class DragonTable extends JFrame {
     JTextField filterText;
 

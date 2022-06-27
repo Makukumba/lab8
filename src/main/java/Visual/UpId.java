@@ -8,7 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
-import static Visual.EnterVisual.t1;
+import static Visual.EnterVisual.UserName;
+
 
 public class UpId extends JFrame {
     CommandManager cm;
@@ -53,7 +54,7 @@ public class UpId extends JFrame {
             setVisible(false);
         }
         else {
-            JOptionPane.showMessageDialog(null, "Дракона с таким "+id+" от пользователя "+t1.getText()+" не существует.", "Message",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Дракона с таким "+id+" от пользователя "+UserName+" не существует.", "Message",JOptionPane.INFORMATION_MESSAGE);
         }
         }
     }

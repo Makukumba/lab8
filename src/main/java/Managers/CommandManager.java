@@ -11,7 +11,8 @@ import java.util.*;
 
 
 import static Managers.Connector.getDBConnection;
-import static Visual.EnterVisual.t1;
+import static Visual.EnterVisual.UserName;
+
 
 public class CommandManager {
     DragonChecker dragonChecker = new DragonChecker();
@@ -121,7 +122,7 @@ public class CommandManager {
         dragon.setId(dragonChecker.ID(ts));
         String insertTableSQL = "INSERT INTO DRAGON"
                 + "(LOGIN, ID, NAME, X, Y, DATE, DESCRIPTION, AGE, WEIGHT, DRAGONCHARACTER, DRAGONHEAD)" + "VALUES"
-                + "('" + t1.getText() + "', " + dragon.getId() + ",'" + dragon.getName() + "', " + dragon.getCoordinates().getX() + ", " + dragon.getCoordinates().getY() + ", '" + dragon.getCreationDate() + "', '" + dragon.getDescription() + "', " + dragon.getAge() + ", " + dragon.getWeight() + ",'" + dragon.getCharacter() + "', " + dragon.getHead().getEyesCount() + ")";
+                + "('" + UserName + "', " + dragon.getId() + ",'" + dragon.getName() + "', " + dragon.getCoordinates().getX() + ", " + dragon.getCoordinates().getY() + ", '" + dragon.getCreationDate() + "', '" + dragon.getDescription() + "', " + dragon.getAge() + ", " + dragon.getWeight() + ",'" + dragon.getCharacter() + "', " + dragon.getHead().getEyesCount() + ")";
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
@@ -156,13 +157,13 @@ public class CommandManager {
     }
 
     public TreeSet<Dragon> clear() throws SQLException {
-        ts.removeIf(dragon -> dragon.getLogin().equals(t1.getText()));
+        ts.removeIf(dragon -> dragon.getLogin().equals(UserName));
         long l = 1;
         for (Dragon dragon : ts) {
             dragon.setId(l);
             l += 1;
         }
-        String message = "Из коллекции удалены все элементы, создателем которых является " + t1.getText();
+        String message = "Из коллекции удалены все элементы, создателем которых является " + UserName;
         JOptionPane.showMessageDialog(null, message, "Message", JOptionPane.INFORMATION_MESSAGE);
         return ts;
     }
@@ -262,7 +263,7 @@ public class CommandManager {
         } else {
             try {
                 for (Dragon dragon : ts) {
-                    if (dragon.getId() == id & dragon.getLogin().equals(t1.getText())) {
+                    if (dragon.getId() == id & dragon.getLogin().equals(UserName)) {
                         a = 1;
                     }
                 }
@@ -277,7 +278,7 @@ public class CommandManager {
                 }
 
                 if (a == 0) {
-                    JOptionPane.showMessageDialog(null, "Дракона с таким id, пренадлежащего пользователю " + t1.getText() + " не существует", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Дракона с таким id, пренадлежащего пользователю " + UserName + " не существует", "Message", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("Значение id должно быть представлено числом");
@@ -296,13 +297,13 @@ public class CommandManager {
             JOptionPane.showMessageDialog(null, "Коллекция пуста, сначала добавьте драконов!", "Message", JOptionPane.INFORMATION_MESSAGE);
         } else {
             for (Dragon dragon : ts) {
-                if (dragon.getDescription().equals(description) & dragon.getLogin().equals(t1.getText())) {
+                if (dragon.getDescription().equals(description) & dragon.getLogin().equals(UserName)) {
                     a = 1;
                 }
             }
             if (a == 1) {
-                ts.removeIf(dragon -> dragon.getDescription().equals(description) & dragon.getLogin().equals(t1.getText()));
-                JOptionPane.showMessageDialog(null, "Все драконы от " + t1.getText() + " с описанием " + description + " удалены", "Message", JOptionPane.INFORMATION_MESSAGE);
+                ts.removeIf(dragon -> dragon.getDescription().equals(description) & dragon.getLogin().equals(UserName));
+                JOptionPane.showMessageDialog(null, "Все драконы от " + UserName + " с описанием " + description + " удалены", "Message", JOptionPane.INFORMATION_MESSAGE);
                 long l = 1;
                 for (Dragon dragon : ts) {
                     dragon.setId(l);
@@ -310,7 +311,7 @@ public class CommandManager {
                 }
             }
             if (a == 0) {
-                JOptionPane.showMessageDialog(null, "Дракона с таким описанием и созданным пользователем " + t1.getText() + " не существует, поробуйте снова", "Message", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Дракона с таким описанием и созданным пользователем " + UserName + " не существует, поробуйте снова", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         }
 
@@ -321,7 +322,7 @@ public class CommandManager {
     public boolean CheckId(long id) {
         int a = 0;
         for (Dragon dragon : ts) {
-            if (id == dragon.getId() & dragon.getLogin().equals(t1.getText())) {
+            if (id == dragon.getId() & dragon.getLogin().equals(UserName)) {
                 a = 1;
                 break;
             } else {
@@ -344,7 +345,7 @@ public class CommandManager {
             } else {
                     for (Dragon dragon : ts) {
                         if (dragon.getId() == d.getId()) {
-                            if (dragon.getLogin().equals(t1.getText())) {
+                            if (dragon.getLogin().equals(UserName)) {
                                 dragon.setName(d.getName());
                                 dragon.setCoordinates(d.getCoordinates());
                                 dragon.setCreationDate(d.getCreationDate());
@@ -362,7 +363,7 @@ public class CommandManager {
                         }
                     }
                     if (a == 0) {
-                        JOptionPane.showMessageDialog(null, "Дракона с таким описанием и созданным пользователем " + t1.getText() + " не существует, поробуйте снова", "Message", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Дракона с таким описанием и созданным пользователем " + UserName + " не существует, поробуйте снова", "Message", JOptionPane.INFORMATION_MESSAGE);
 
                     }
             }
@@ -376,8 +377,8 @@ public class CommandManager {
             JOptionPane.showMessageDialog(null, "Коллекция пуста, сначала добавьте элементы!", "Message", JOptionPane.INFORMATION_MESSAGE);
         } else {
             try {
-                ts.removeIf(dragon -> dragon.getId() < id & t1.getText().equals(dragon.getLogin()));
-                JOptionPane.showMessageDialog(null, "Драконы с id меньше, чем " + id + ", принадлежащие " + t1.getText() + " удалены", "Message", JOptionPane.INFORMATION_MESSAGE);
+                ts.removeIf(dragon -> dragon.getId() < id & UserName.equals(dragon.getLogin()));
+                JOptionPane.showMessageDialog(null, "Драконы с id меньше, чем " + id + ", принадлежащие " + UserName + " удалены", "Message", JOptionPane.INFORMATION_MESSAGE);
                 long l = 1;
                 for (Dragon dragon : ts) {
                     dragon.setId(l);

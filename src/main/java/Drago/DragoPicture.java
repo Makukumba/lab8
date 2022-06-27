@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static Managers.CommandManager.ts;
-import static Visual.EnterVisual.t1;
 
 public class DragoPicture extends JFrame {
     Graphics g;

@@ -27,7 +27,7 @@ public class MainMenu extends JFrame {
     public MainMenu(CommandManager cm, ResourceBundle bundle) {
         this.bundle = bundle;
         this.cm = cm;
-        setTitle(bundle.getString("User")+": " + t1.getText());
+        setTitle(bundle.getString("User")+": " + UserName);
         //setLayout(new FlowLayout());
         j1 = new JButton("help");
         j2 = new JButton("info");

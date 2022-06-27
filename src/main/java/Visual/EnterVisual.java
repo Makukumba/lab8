@@ -22,7 +22,8 @@ import java.util.Scanner;
 import static Managers.Connector.getDBConnection;
 
 public class EnterVisual extends JFrame {
-    public static JTextField t1;
+    public static String UserName;
+    JTextField t1;
     JPasswordField t2;
     JLabel l1, l2;
     JButton button, button1;
@@ -78,9 +79,9 @@ public class EnterVisual extends JFrame {
             while (isUserExists == false) {
                 Connection dbConnection = null;
                 Statement statement = null;
-
+                UserName = t1.getText();
                 Hash hash = new Hash();
-                String selectTableSQL = "SELECT from USERS WHERE LOGIN = '" + t1.getText() + "' AND PASSWORD = '" + hash.hashPassword(t2.getText()) + "'";
+                String selectTableSQL = "SELECT from USERS WHERE LOGIN = '" + UserName + "' AND PASSWORD = '" + hash.hashPassword(t2.getText()) + "'";
                 try {
                     dbConnection = getDBConnection();
                     statement = dbConnection.createStatement();
@@ -91,7 +92,7 @@ public class EnterVisual extends JFrame {
                         isUserExists = true;
                     }
                     if (isUserExists) {
-                        JOptionPane.showMessageDialog(null, "Выполнен вход под логином " + t1.getText(), "Message", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Выполнен вход под логином " + UserName, "Message", JOptionPane.INFORMATION_MESSAGE);
                         MainMenu mainMenu = new MainMenu(cm,b);
                         setVisible(false);
                         cm.read();

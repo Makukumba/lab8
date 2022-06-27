@@ -2,28 +2,25 @@ package Visual;
 
 import Drago.Dragon;
 import Managers.CommandManager;
-import commands.Add_if_max;
-import commands.Add_if_min;
+import commands.AddCommand;
+import commands.InfoCommand;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ResourceBundle;
 
-import static Visual.EnterVisual.t1;
+import static Visual.EnterVisual.UserName;
 
-public class Visual_Add_If_Min extends JFrame {
+public class VisualAdd extends JFrame {
     CommandManager cm;
-    long id;
     JTextField Name, X, Y, Desc, Age, Weight, Head;
     JComboBox comboBox;
     ResourceBundle bundle;
-    public Visual_Add_If_Min(CommandManager cm, long id,ResourceBundle bundle) {
-        this.bundle = bundle;
+    public VisualAdd(CommandManager cm, ResourceBundle bundle) {
         this.cm = cm;
-        this.id = id;
+        this.bundle = bundle;
         setTitle("Добавить дракона");
         Box box1 = Box.createHorizontalBox();
         JLabel NameLabel = new JLabel(bundle.getString("Имя дракона")+":");
@@ -31,6 +28,7 @@ public class Visual_Add_If_Min extends JFrame {
         box1.add(NameLabel);
         box1.add(Box.createHorizontalStrut(6));
         box1.add(Name);
+
         Box box2 = Box.createHorizontalBox();
         JLabel XLabel = new JLabel(bundle.getString("Координата X")+":");
         X = new JTextField(15);
@@ -128,29 +126,25 @@ public class Visual_Add_If_Min extends JFrame {
         button2.addActionListener(new BackButton());
     }
 
-    private class AddButton implements ActionListener {
+    private class BackButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            VisualChecker v = new VisualChecker();
-            int index = comboBox.getSelectedIndex();
-            Dragon dragon = new Dragon(id, v.VName(Name.getText()), v.VCoord(X.getText(), Y.getText()), v.CREATIONDATE(),
-                    v.VDesc(Desc.getText()), v.Vage(Age.getText()), v.Vweight(Weight.getText()), v.VChar(index), v.VdragonHead(Head.getText()), t1.getText());
-            if (v.Errorcounter() == false) {
-                v.ErrorMessage();
-            } else {
-                Add_if_min add_if_min = new Add_if_min(cm, dragon);
-                try {
-                    add_if_min.execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            MainMenu mainMenu = new MainMenu(cm,bundle);
+            setVisible(false);
         }
     }
 
-    private class BackButton implements ActionListener {
+    private class AddButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            VisualIfMin visualIfMin = new VisualIfMin(cm,bundle);
-            setVisible(false);
+                int index = comboBox.getSelectedIndex();
+                VisualChecker v = new VisualChecker();
+                Dragon dragon = new Dragon(null, v.VName(Name.getText()), v.VCoord(X.getText(),Y.getText()), v.CREATIONDATE(),
+                        v.VDesc(Desc.getText()), v.Vage(Age.getText()), v.Vweight(Weight.getText()), v.VChar(index), v.VdragonHead(Head.getText()), UserName);
+                if (v.Errorcounter() == false) {
+                    v.ErrorMessage();
+                } else {
+                    AddCommand addCommand = new AddCommand(cm,dragon);
+                    addCommand.execute();
+                }
         }
     }
 }
