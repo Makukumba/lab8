@@ -6,14 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import static Managers.CommandManager.ts;
 
 public class DragoPicture extends JFrame {
     Graphics g;
-
-    public DragoPicture() {
-        super("Здравствуй, мир XXI века!");
+    ResourceBundle bundle;
+    public DragoPicture(ResourceBundle bundle) {
+        super(bundle.getString("Graph"));
         setSize(1000, 1000);
         setLayout(null);
         for (Dragon dragon : ts) {

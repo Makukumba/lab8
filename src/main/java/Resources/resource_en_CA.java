@@ -32,7 +32,10 @@ public class resource_en_CA extends ListResourceBundle {
                     {"Вес дракона","Dragon weight"},
                     {"Характер дракона","Dragon character"},
                     {"Количество глаз","Number of eyes"},
-                    {"Добавить дракона","Add dragon"}
+                    {"Добавить дракона","Add dragon"},
+                    {"Go to Main Menu","Go to Main Menu"},
+                    {"Ошибка, сначала зайдите в свой профиль VK","Error, first go to your VK profile"},
+                    {"BackButton","Back"}
             };
     protected Object[][] getContents() {
         return contents;

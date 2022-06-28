@@ -2,6 +2,7 @@ package VK;
 
 import Managers.CommandManager;
 import Visual.MainMenu;
+import Visual.Ru.SimpleGuiRu;
 import com.teamdev.jxbrowser.browser.Browser;
 import com.teamdev.jxbrowser.engine.Engine;
 import com.teamdev.jxbrowser.engine.EngineOptions;
@@ -18,6 +19,8 @@ import com.teamdev.jxbrowser.profile.Profiles;
 import com.teamdev.jxbrowser.view.swing.BrowserView;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -38,47 +41,50 @@ import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
 //3 - https://oauth.vk.com/blank.html#access_token=vk1.a.QdTRFnNTe_GLcwLKm9aty5fX_MLCiQZNQefDghrC71HZjAwTr_CSPefcVSM54Ps4eHr0-2EtKNwSCpVzL412kEQPZKdlqfCZaWMqd969mxdpTbJUzJlOW8PmToyuMJJfgsxOe1Y9tCuTyWps89F-jg1YOEvbDKvcn0-HcsF-s-A40sKKiFbYBJA1R46SC2St&expires_in=86400&user_id=736927086
 public class VKAuth {
     Browser browser;
-    JTextField addressbar;
+    JButton button, backbutton;
     CommandManager cm = new CommandManager();
     ResourceBundle bundle;
-    JFrame frame;
+    JFrame frame,frame1;
 
-     public  VKAuth(ResourceBundle bundle) throws IOException, URISyntaxException {
+    public VKAuth(ResourceBundle bundle) throws IOException, URISyntaxException {
         this.bundle = bundle;
         Engine engine = Engine.newInstance(EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("").build());
         browser = engine.newBrowser();
-        SwingUtilities.invokeLater(() -> {
-            BrowserView view = BrowserView.newInstance(browser);
-            addressbar = new JTextField("");
-            addressbar.addActionListener(e -> browser.navigation().loadUrl(addressbar.getText()));
-            frame = new JFrame("VK");
-            frame.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent e) {
-                    engine.close();
-                }
-            });
+        frame = new JFrame("VK");
 
-            frame.add(addressbar, BorderLayout.NORTH);
-            frame.add(view, BorderLayout.CENTER);
-            frame.setSize(1280, 800);
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
 
-            browser.navigation().loadUrl("https://oauth.vk.com/authorize?client_id=8203886&display=page&redirect_uri=https://oauth.vk.com/blank.html.&scope=friends&response_type=token&v=5.59");
-        });
-        while (true) {
+        button = new JButton(bundle.getString("Go to Main Menu"));
+        backbutton = new JButton(bundle.getString("BackButton"));
+        BrowserView view = BrowserView.newInstance(browser);
+        frame.add(button, BorderLayout.SOUTH);
+        frame.add(backbutton, BorderLayout.NORTH);
+        frame.add(view, BorderLayout.CENTER);
+        frame.setSize(1280, 800);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        browser.navigation().loadUrl("https://oauth.vk.com/authorize?client_id=8203886&display=page&redirect_uri=https://oauth.vk.com/blank.html.&scope=friends&response_type=token&v=5.59");
+        button.addActionListener(new EnterButton());
+        backbutton.addActionListener(new BackButton());
+    }
+
+    private class EnterButton implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
             if (browser.url().startsWith("https://oauth.vk.com/blank.html")) {
                 String url = browser.url();
                 UserName = url.substring(browser.url().lastIndexOf("=") + 1);
                 MainMenu mainMenu = new MainMenu(cm, bundle);
                 frame.setVisible(false);
-                break;
+            } else {
+                JOptionPane.showMessageDialog(null, bundle.getString("Ошибка, сначала зайдите в свой профиль Вконтакте"), "Authorization Error", JOptionPane.INFORMATION_MESSAGE);
             }
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        }
+    }
+
+    private class BackButton implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            SimpleGuiRu simpleGuiRu = new SimpleGuiRu(bundle);
+            frame.setVisible(false);
         }
     }
 }

@@ -290,7 +290,7 @@ public class MainMenu extends JFrame {
 
     private class GraphButton implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            DragoPicture dragoPicture = new DragoPicture();
+            DragoPicture dragoPicture = new DragoPicture(bundle);
         }
     }
 }

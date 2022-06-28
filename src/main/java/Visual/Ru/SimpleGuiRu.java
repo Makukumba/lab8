@@ -3,6 +3,7 @@ package Visual.Ru;
 import Managers.CommandManager;
 import Managers.Commander;
 import VK.VKAuth;
+import Visual.BrowserTest;
 import Visual.EnterVisual;
 import Visual.LocalChanger;
 import Visual.RegVisual;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class SimpleGuiRu extends JFrame {
     ResourceBundle bundle;
@@ -43,8 +45,9 @@ public class SimpleGuiRu extends JFrame {
         Box box2 = Box.createHorizontalBox();
         box2.add(b2);
         b3 = new JButton(bundle.getString("Changer"));
-        //Icon icon = new ImageIcon("C:\\Users\\Public\\lab8\\Vkontakte.png");
-        b4 = new JButton("VK");
+        Icon icon = new ImageIcon("C:\\Users\\Public\\lab8\\Vkontakte.png");
+
+        b4 = new JButton(icon);
         l1 = new JLabel(bundle.getString("Date"));
         Box box3 = Box.createHorizontalBox();
         box3.add(b3);
@@ -53,6 +56,7 @@ public class SimpleGuiRu extends JFrame {
         Box box5 = Box.createHorizontalBox();
         box5.add(l1);
         b1.setPreferredSize(b3.getPreferredSize());
+        b4.setPreferredSize(b3.getPreferredSize());
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Box mainBox = Box.createVerticalBox();
@@ -74,6 +78,7 @@ public class SimpleGuiRu extends JFrame {
         b2.addActionListener(new RegEventListener());
         b3.addActionListener(new ChangeButton());
         b4.addActionListener(new VkEnter());
+
     }
 
     private class EnterEventListener implements ActionListener {
@@ -99,6 +104,7 @@ public class SimpleGuiRu extends JFrame {
 
     private class VkEnter implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            //BrowserTest browserTest = new BrowserTest();
             try {
                 VKAuth vkAuth = new VKAuth(bundle);
             } catch (IOException e) {
@@ -106,8 +112,8 @@ public class SimpleGuiRu extends JFrame {
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
-
             setVisible(false);
+
         }
     }
 }

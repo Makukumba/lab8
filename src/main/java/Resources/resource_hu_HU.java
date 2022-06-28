@@ -32,7 +32,10 @@ public class resource_hu_HU extends ListResourceBundle {
                     {"Вес дракона","Sárkány súlya"},
                     {"Характер дракона","Sárkány karakter"},
                     {"Количество глаз","Szemek száma"},
-                    {"Добавить дракона","Add hozzá a sárkányt"}
+                    {"Добавить дракона","Add hozzá a sárkányt"},
+                    {"Go to Main Menu","Lépjen ki a főmenübe"},
+                    {"Ошибка, сначала зайдите в свой профиль VK","Hiba, először lépjen a VK-profiljába"},
+                    {"BackButton","Vissza"}
             };
 
     protected Object[][] getContents() {
